@@ -68,7 +68,23 @@ if [ ! -d mountpoint2 ]; then
 fi
 
 # Mount first partition
-#mount -o loop,offset=$((512*blockstart1)) piCore-11.0.img mountpoint1
+printf "Mounting 1st partition\n"
+mount -o loop,offset=$((512*blockstart1)) piCore-11.0.img mountpoint1
+
+# Modify bootcodes
+# Simply copy contents, concatentate string (additional bootcodes) and write back to file
+bootcodes=`cat mountpoint1/cmdline.txt`
+# Add norestore,noswap bootcode
+bootcodes="${bootcodes} norestore noswap nodhcp"
+echo $bootcodes > mountpoint1/cmdline.txt
+printf "Bootcodes:\n"
+cat mountpoint1/cmdline.txt
+
+linebreak
+pause "Press any key to continue.."
+
+# Unmount first partition
+umount mountpoint1
 
 # Mount second partition
 printf "Mounting 2nd partition\n"
