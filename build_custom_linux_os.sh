@@ -119,7 +119,8 @@ rm -f Log.txt Extension.list fetchExt.sh
 
 # Add extensions to onboot.lst for auto-loading
 cd ..
-echo "Xorg.tcz" >> onboot.lst
+# But first clear existing entries in it
+echo "Xorg.tcz" > onboot.lst # overwrite, not append, effectively clearing the file before writing to it
 echo "flwm_topside.tcz" >> onboot.lst
 
 # Unmount second partition
