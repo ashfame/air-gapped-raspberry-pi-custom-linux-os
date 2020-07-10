@@ -75,7 +75,7 @@ mount -o loop,offset=$((512*blockstart1)) piCore-11.0.img mountpoint1
 # Simply copy contents, concatentate string (additional bootcodes) and write back to file
 bootcodes=`cat mountpoint1/cmdline.txt`
 # Add norestore,noswap bootcode
-bootcodes="${bootcodes} norestore noswap nodhcp"
+bootcodes="${bootcodes} norestore noswap nozswap nodhcp"
 echo $bootcodes > mountpoint1/cmdline.txt
 printf "Bootcodes:\n"
 cat mountpoint1/cmdline.txt
