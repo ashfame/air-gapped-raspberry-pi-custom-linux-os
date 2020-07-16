@@ -70,6 +70,12 @@ fi
 # Mount first partition
 printf "Mounting 1st partition\n"
 mount -o loop,offset=$((512*blockstart1)) piCore-11.0.img mountpoint1
+if [ $? -eq 0 ]; then
+    echo "Mounting successful!"
+else
+    echo "Mounting failed. Attempting sudo.."
+	sudo mount -o loop,offset=$((512*blockstart1)) piCore-11.0.img mountpoint1
+fi
 
 # Modify bootcodes
 # Simply copy contents, concatentate string (additional bootcodes) and write back to file
