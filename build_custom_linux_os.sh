@@ -75,6 +75,12 @@ if [ $? -eq 0 ]; then
 else
     echo "Mounting failed. Attempting sudo.."
 	sudo mount -o loop,offset=$((512*blockstart1)) piCore-11.0.img mountpoint1
+	if [ $? -eq 0 ]; then
+    	echo "Mounting successful!"
+	else
+		echo "Mounting failed!"
+		exit 1
+	fi
 fi
 
 # Modify bootcodes
