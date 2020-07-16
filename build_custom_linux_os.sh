@@ -55,17 +55,17 @@ linebreak
 fdisk -l piCore-11.0.img
 printf "\nEnter block start value of 1st partition: "
 read blockstart1
-printf "Enter block start value of 2nd partition: "
-read blockstart2
+#printf "Enter block start value of 2nd partition: "
+#read blockstart2
 
 # Create mounting points
 printf "\nCreating mounting points..\n"
 if [ ! -d mountpoint1 ]; then
 	mkdir mountpoint1
 fi
-if [ ! -d mountpoint2 ]; then
-	mkdir mountpoint2
-fi
+# if [ ! -d mountpoint2 ]; then
+# 	mkdir mountpoint2
+# fi
 
 # Mount first partition
 printf "Mounting 1st partition\n"
@@ -83,30 +83,24 @@ cat mountpoint1/cmdline.txt
 linebreak
 pause "Press any key to continue.."
 
-# Unmount first partition
-umount mountpoint1
+# Create tce directory here
+cd mountpoint1
+mkdir tce
 
-# Mount second partition
-printf "Mounting 2nd partition\n"
-mount -o loop,offset=$((512*blockstart2)) piCore-11.0.img mountpoint2
-test $? -eq 0 || ( echo "Error!!" && exit 1 )
-
-pause "Press any key to continue.."
-
-# Create copy2fs.flg file under tce directory
-touch mountpoint2/tce/copy2fs.flg
-
-# Copy fetchExt.sh under tce/optional for fetching packages
-# If its missing, throw error message and halt script
+cd tce
+touch copy2fs.flg
+mkdir optional
 cd ..
-[ -f fetchExt.sh ] && cp fetchExt.sh picore/mountpoint2/tce/optional || ( echo "fetchExt.sh is missing" && exit 1 )
+
+cd ../../
+[ -f fetchExt.sh ] && cp fetchExt.sh picore/mountpoint1/tce/optional || ( echo "fetchExt.sh is missing" && exit 1 )
 cd picore
 
 # Download extensions
 printf "\nReady to fetch extensions. "
 pause "Press any key to continue.."
 linebreak
-cd mountpoint2/tce/optional
+cd mountpoint1/tce/optional
 chmod +x fetchExt.sh
 ./fetchExt.sh flwm_topside
 ./fetchExt.sh Xorg
@@ -123,9 +117,51 @@ cd ..
 echo "Xorg.tcz" > onboot.lst # overwrite, not append, effectively clearing the file before writing to it
 echo "flwm_topside.tcz" >> onboot.lst
 
-# Unmount second partition
-cd ../../
-umount mountpoint2
+cd ..
+
+# Unmount first partition
+umount mountpoint1
+
+# Mount second partition
+# printf "Mounting 2nd partition\n"
+# mount -o loop,offset=$((512*blockstart2)) piCore-11.0.img mountpoint2
+# test $? -eq 0 || ( echo "Error!!" && exit 1 )
+
+# pause "Press any key to continue.."
+
+# # Create copy2fs.flg file under tce directory
+# touch mountpoint2/tce/copy2fs.flg
+
+# # Copy fetchExt.sh under tce/optional for fetching packages
+# # If its missing, throw error message and halt script
+# cd ..
+# [ -f fetchExt.sh ] && cp fetchExt.sh picore/mountpoint2/tce/optional || ( echo "fetchExt.sh is missing" && exit 1 )
+# cd picore
+
+# # Download extensions
+# printf "\nReady to fetch extensions. "
+# pause "Press any key to continue.."
+# linebreak
+# cd mountpoint2/tce/optional
+# chmod +x fetchExt.sh
+# ./fetchExt.sh flwm_topside
+# ./fetchExt.sh Xorg
+
+# pause "Extensions downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
+# linebreak
+
+# # Clean fetchExt.sh files
+# rm -f Log.txt Extension.list fetchExt.sh
+
+# # Add extensions to onboot.lst for auto-loading
+# cd ..
+# # But first clear existing entries in it
+# echo "Xorg.tcz" > onboot.lst # overwrite, not append, effectively clearing the file before writing to it
+# echo "flwm_topside.tcz" >> onboot.lst
+
+# # Unmount second partition
+# cd ../../
+# umount mountpoint2
 
 # Check out modified IMG file
 printf "MD5 verification of modified IMG file (should fail):"
