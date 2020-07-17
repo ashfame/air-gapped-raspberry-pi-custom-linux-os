@@ -70,6 +70,7 @@ fi
 # Mount first partition
 printf "Mounting 1st partition\n"
 mount -o loop,offset=$((512*blockstart1)) piCore-11.0.img mountpoint1
+test $? -eq 0 || ( echo "Error mounting 1st partition!!" && exit 1 )
 
 # Modify bootcodes
 # Simply copy contents, concatentate string (additional bootcodes) and write back to file
@@ -89,7 +90,7 @@ umount mountpoint1
 # Mount second partition
 printf "Mounting 2nd partition\n"
 mount -o loop,offset=$((512*blockstart2)) piCore-11.0.img mountpoint2
-test $? -eq 0 || ( echo "Error!!" && exit 1 )
+test $? -eq 0 || ( echo "Error mounting 2nd partition!!" && exit 1 )
 
 pause "Press any key to continue.."
 
