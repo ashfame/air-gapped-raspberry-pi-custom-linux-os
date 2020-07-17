@@ -98,6 +98,9 @@ pause "Press any key to continue.."
 # Create copy2fs.flg file under tce directory
 touch mountpoint2/tce/copy2fs.flg
 
+# Remove mydata.tgz since we won't be restoring any persistent data
+rm mountpoint2/tce/mydata.tgz
+
 # Copy fetchExt.sh under tce/optional for fetching packages
 # If its missing, throw error message and halt script
 cd ..
