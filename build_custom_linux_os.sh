@@ -112,7 +112,7 @@ printf "\nReady to fetch extensions. "
 pause "Press any key to continue.."
 linebreak
 cd mountpoint2/tce/optional
-rm * # remove all existing extensions, we will explicitly specify what we are going to need
+rm *tcz* # remove all existing extensions, we will explicitly specify what we are going to need
 chmod +x fetchExt.sh
 ./fetchExt.sh flwm_topside
 ./fetchExt.sh Xorg
