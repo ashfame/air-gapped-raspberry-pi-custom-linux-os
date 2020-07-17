@@ -73,7 +73,7 @@ mount -o loop,offset=$((512*blockstart1)) piCore-11.0.img mountpoint1
 test $? -eq 0 || ( echo "Error mounting 1st partition!!" && exit 1 )
 
 # Modify bootcodes
-# Simply copy contents, concatentate string (additional bootcodes) and write back to file
+# Simply copy contents, concatentate string (additional bootcodes) and overwrite the file
 bootcodes=`cat mountpoint1/cmdline.txt`
 # Add norestore,noswap bootcode
 bootcodes="${bootcodes} norestore noswap nozswap nodhcp"
@@ -134,7 +134,7 @@ md5sum -c piCore-11.0.img.md5.txt
 pause "Press any key to continue.."
 
 # Copy out the modified IMG file
-cp piCore-11.0.img ..
+cp piCore-11.0.img ../piCore-airgap-11.0.img
 cd ..
 
 # Cleanup before exit
