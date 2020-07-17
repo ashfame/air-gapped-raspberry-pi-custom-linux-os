@@ -88,6 +88,7 @@ pause "Press any key to continue.."
 umount mountpoint1
 
 # Mount second partition
+linebreak
 printf "Mounting 2nd partition\n"
 mount -o loop,offset=$((512*blockstart2)) piCore-11.0.img mountpoint2
 test $? -eq 0 || ( echo "Error mounting 2nd partition!!" && exit 1 )
