@@ -18,6 +18,7 @@ pause() {
 
 # Function to clean up and leave the state of the directory exactly how it was before script ran
 cleanup() {
+	linebreak
 	pause "Going to cleanup. Press any key to continue.."
 
 	# Delete picore directory
