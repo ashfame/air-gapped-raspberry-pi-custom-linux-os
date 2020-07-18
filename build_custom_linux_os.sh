@@ -77,7 +77,7 @@ test $? -eq 0 || ( echo "Error mounting 1st partition!!" && exit 1 )
 # Simply copy contents, concatentate string (additional bootcodes) and overwrite the file
 bootcodes=`cat mountpoint1/cmdline.txt`
 # Add norestore,noswap bootcode
-bootcodes="${bootcodes} norestore noswap nozswap nodhcp"
+bootcodes="${bootcodes} norestore noswap nozswap nodhcp waitusb=5"
 echo $bootcodes > mountpoint1/cmdline.txt
 printf "Bootcodes:\n"
 cat mountpoint1/cmdline.txt
