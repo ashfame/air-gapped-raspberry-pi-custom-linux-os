@@ -49,11 +49,11 @@ cd picore
 unzip -o piCore-11.0.zip # overwrite existing files during unzip
 printf "MD5 verification of IMG file:"
 md5sum -c piCore-11.0.img.md5.txt
-pause "Press any key to continue.."
 
 ####################################################
 # Expand second partition to accomodate extensions #
 ####################################################
+linebreak
 pause "Going to expand second partition. Press any key to continue.."
 # create destination image about 250MB (will trim once the build finishes based on how much space it occupies)
 dd if=/dev/zero of=1.img bs=1K count=$((250*512))
@@ -64,7 +64,7 @@ dd if=piCore-11.0.img of=$devicePath
 # this is how it looks now
 fdisk -l $devicePath
 # expand partition 2 to the end of the file:
-sudo partest -s $devicePath resizepart 2 100%
+sudo parted -s $devicePath resizepart 2 100%
 # this needs to be done before expanding the filesystem to inform the kernel the MBR changed:
 e2fsck -f $devicePath
 # finally, we expand the filesystem:
