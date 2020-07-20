@@ -59,6 +59,8 @@ read blockstart1
 printf "Enter block start value of 2nd partition: "
 read blockstart2
 
+# @TODO Expand second partition to accomodate extensions
+
 # Create mounting points
 printf "\nCreating mounting points..\n"
 if [ ! -d mountpoint1 ]; then
@@ -102,10 +104,11 @@ touch mountpoint2/tce/copy2fs.flg
 # Remove mydata.tgz since we won't be restoring any persistent data
 rm mountpoint2/tce/mydata.tgz
 
-# Copy fetchExt.sh under tce/optional for fetching packages
+# Copy Extensions fetching script(s) under tce/optional for fetching packages
 # If its missing, throw error message and halt script
 cd ..
-[ -f fetchExt.sh ] && cp fetchExt.sh picore/mountpoint2/tce/optional || ( echo "fetchExt.sh is missing" && exit 1 )
+[ -f fetchExtArmv6.sh ] && cp fetchExtArmv6.sh picore/mountpoint2/tce/optional || ( echo "fetchExtArmv6.sh is missing" && exit 1 )
+[ -f fetchExtArmv7.sh ] && cp fetchExtArmv7.sh picore/mountpoint2/tce/optional || ( echo "fetchExtArmv7.sh is missing" && exit 1 )
 cd picore
 
 # Download extensions
@@ -114,21 +117,33 @@ pause "Press any key to continue.."
 linebreak
 cd mountpoint2/tce/optional
 rm *tcz* # remove all existing extensions, we will explicitly specify what we are going to need
-chmod +x fetchExt.sh
-./fetchExt.sh flwm_topside
-./fetchExt.sh Xorg
-
-pause "Extensions downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
+chmod +x fetchExtArmv6.sh
+./fetchExtArmv6.sh flwm_topside
+./fetchExtArmv6.sh Xorg
+./fetchExtArmv6.sh wbar
+./fetchExtArmv6.sh rpi-vc
+pause "Extensions from ARMv6 repo downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
+linebreak
+./fetchExtArmv7.sh epiphany
+pause "Extensions from ARMv7 repo downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
 linebreak
 
-# Clean fetchExt.sh files
-rm -f Log.txt Extension.list fetchExt.sh
+# Add custom extensions
+wget https://woodpckr.com/vaultbareapp.tcz
+chown 1001:50 vaultbareapp.tcz
+
+# Clean fetchExtArmv6.sh files
+rm -f Log.txt Extension.list fetchExtArmv6.sh fetchExtArmv7.sh
 
 # Add extensions to onboot.lst for auto-loading
 cd ..
 # But first clear existing entries in it
 echo "Xorg.tcz" > onboot.lst # overwrite, not append, effectively clearing the file before writing to it
 echo "flwm_topside.tcz" >> onboot.lst
+echo "wbar.tcz" >> onboot.lst
+echo "vaultbareapp.tcz" >> onboot.lst
+echo "epiphany.tcz" >> onboot.lst
+echo "rpi-vc.tcz" >> onboot.lst
 
 # Unmount second partition
 cd ../../
