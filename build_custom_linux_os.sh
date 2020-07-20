@@ -68,7 +68,7 @@ sudo parted -s $devicePath resizepart 2 100%
 # this needs to be done before expanding the filesystem to inform the kernel the MBR changed:
 e2fsck -f "${devicePath}p2"
 # finally, we expand the filesystem:
-resize2fs -p $devicePath
+resize2fs -p "${devicePath}p2"
 # this is how it looks
 fdisk -l 1.img
 # release loop device
