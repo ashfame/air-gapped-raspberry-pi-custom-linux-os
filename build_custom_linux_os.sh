@@ -145,6 +145,7 @@ chmod +x fetchExtArmv6.sh
 ./fetchExtArmv6.sh Xorg
 ./fetchExtArmv6.sh wbar
 ./fetchExtArmv6.sh rpi-vc
+./fetchExtArmv6.sh aterm
 pause "Extensions from ARMv6 repo downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
 linebreak
 ./fetchExtArmv7.sh epiphany
@@ -167,6 +168,7 @@ echo "wbar.tcz" >> onboot.lst
 echo "vaultbareapp.tcz" >> onboot.lst
 echo "epiphany.tcz" >> onboot.lst
 echo "rpi-vc.tcz" >> onboot.lst
+echo "aterm.tcz" >> onboot.lst
 
 # Unmount second partition
 cd ../../
