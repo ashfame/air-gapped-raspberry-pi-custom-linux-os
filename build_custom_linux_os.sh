@@ -51,6 +51,31 @@ printf "MD5 verification of IMG file:"
 md5sum -c piCore-11.0.img.md5.txt
 pause "Press any key to continue.."
 
+####################################################
+# Expand second partition to accomodate extensions #
+####################################################
+pause "Going to expand second partition. Press any key to continue.."
+# create destination image about 250MB (will trim once the build finishes based on how much space it occupies)
+dd if=/dev/zero of=1.img bs=1K count=$((250*512))
+# loop mount the file as a device
+devicePath=`losetup --show --find --partscan 1.img`
+# copy original image over it
+dd if=piCore-11.0.img of=$devicePath
+# this is how it looks now
+fdisk -l $devicePath
+# expand partition 2 to the end of the file:
+sudo partest -s $devicePath resizepart 2 100%
+# this needs to be done before expanding the filesystem to inform the kernel the MBR changed:
+e2fsck -f $devicePath
+# finally, we expand the filesystem:
+resize2fs -p $devicePath
+# this is how it looks
+fdisk -l 1.img
+# release loop device
+losetup -d $devicePath
+# replace the img file we working with
+rm piCore-11.0.img && mv 1.img piCore-11.0.img
+
 # Get block start for specifying in the mount commands
 linebreak
 fdisk -l piCore-11.0.img
@@ -58,8 +83,6 @@ printf "\nEnter block start value of 1st partition: "
 read blockstart1
 printf "Enter block start value of 2nd partition: "
 read blockstart2
-
-# @TODO Expand second partition to accomodate extensions
 
 # Create mounting points
 printf "\nCreating mounting points..\n"
