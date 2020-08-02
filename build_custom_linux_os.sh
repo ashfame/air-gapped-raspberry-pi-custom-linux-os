@@ -55,8 +55,8 @@ md5sum -c piCore-11.0.img.md5.txt
 ####################################################
 linebreak
 pause "Going to expand second partition. Press any key to continue.."
-# create destination image about 250MB (will trim once the build finishes based on how much space it occupies)
-dd if=/dev/zero of=1.img bs=1K count=$((250*1024))
+# create destination image about 350MB (will trim once the build finishes based on how much space it occupies)
+dd if=/dev/zero of=1.img bs=1K count=$((350*1024))
 # loop mount the file as a device
 devicePath=`losetup --show --find --partscan 1.img`
 # copy original image over it
