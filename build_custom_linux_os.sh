@@ -130,8 +130,7 @@ rm mountpoint2/tce/mydata.tgz
 # Copy Extensions fetching script(s) under tce/optional for fetching packages
 # If its missing, throw error message and halt script
 cd ..
-[ -f fetchExtArmv6.sh ] && cp fetchExtArmv6.sh picore/mountpoint2/tce/optional || ( echo "fetchExtArmv6.sh is missing" && exit 1 )
-[ -f fetchExtArmv7.sh ] && cp fetchExtArmv7.sh picore/mountpoint2/tce/optional || ( echo "fetchExtArmv7.sh is missing" && exit 1 )
+[ -f fetchExt.sh ] && cp fetchExt.sh picore/mountpoint2/tce/optional || ( echo "fetchExt.sh is missing" && exit 1 )
 cd picore
 
 # Download extensions
@@ -140,24 +139,23 @@ pause "Press any key to continue.."
 linebreak
 cd mountpoint2/tce/optional
 rm *tcz* # remove all existing extensions, we will explicitly specify what we are going to need
-chmod +x fetchExtArmv6.sh
-./fetchExtArmv6.sh flwm_topside
-./fetchExtArmv6.sh Xorg
-./fetchExtArmv6.sh wbar
-./fetchExtArmv6.sh rpi-vc
-./fetchExtArmv6.sh aterm
-pause "Extensions from ARMv6 repo downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
-linebreak
-./fetchExtArmv7.sh epiphany
-pause "Extensions from ARMv7 repo downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
+chmod +x fetchExt.sh
+./fetchExt.sh flwm_topside
+./fetchExt.sh Xorg
+./fetchExt.sh wbar
+./fetchExt.sh rpi-vc
+./fetchExt.sh aterm
+./fetchExt.sh epiphany
+./fetchExt.sh firefox
+pause "Extensions downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
 linebreak
 
 # Add custom extensions
 wget https://woodpckr.com/vaultbareapp.tcz
 chown 1001:50 vaultbareapp.tcz
 
-# Clean fetchExtArmv6.sh files
-rm -f Log.txt Extension.list fetchExtArmv6.sh fetchExtArmv7.sh
+# Clean fetchExt.sh files
+rm -f Log.txt Extension.list fetchExt.sh
 
 # Add extensions to onboot.lst for auto-loading
 cd ..
@@ -169,6 +167,8 @@ echo "vaultbareapp.tcz" >> onboot.lst
 echo "epiphany.tcz" >> onboot.lst
 echo "rpi-vc.tcz" >> onboot.lst
 echo "aterm.tcz" >> onboot.lst
+echo "epiphany.tcz" >> onboot.lst
+echo "firefox.tcz" >> onboot.lst
 
 # Unmount second partition
 cd ../../
