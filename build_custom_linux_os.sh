@@ -152,8 +152,8 @@ chmod +x fetchExt.sh
 ./fetchExt.sh Xorg
 ./fetchExt.sh wbar
 ./fetchExt.sh rpi-vc
+./fetchExt.sh libv4l2
 ./fetchExt.sh aterm
-./fetchExt.sh epiphany
 ./fetchExt.sh firefox
 pause "Extensions downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
 linebreak
@@ -172,10 +172,9 @@ echo "Xorg.tcz" > onboot.lst # overwrite, not append, effectively clearing the f
 echo "flwm_topside.tcz" >> onboot.lst
 echo "wbar.tcz" >> onboot.lst
 echo "vaultbareapp.tcz" >> onboot.lst
-echo "epiphany.tcz" >> onboot.lst
 echo "rpi-vc.tcz" >> onboot.lst
+echo "libv4l2.tcz" >> onboot.lst
 echo "aterm.tcz" >> onboot.lst
-echo "epiphany.tcz" >> onboot.lst
 echo "firefox.tcz" >> onboot.lst
 
 # Unmount second partition
