@@ -101,11 +101,16 @@ test $? -eq 0 || ( echo "Error mounting 1st partition!!" && exit 1 )
 # Modify bootcodes
 # Simply copy contents, concatentate string (additional bootcodes) and overwrite the file
 bootcodes=`cat mountpoint1/cmdline.txt`
+bootcodes3=`cat mountpoint1/cmdline3.txt`
 # Add norestore,noswap bootcode
-bootcodes="${bootcodes} norestore noswap nozswap nodhcp waitusb=5"
+addbootcodes="norestore noswap nozswap nodhcp waitusb=5"
+bootcodes="${bootcodes} ${addbootcodes}"
+bootcodes3="${bootcodes3} ${addbootcodes}"
 echo $bootcodes > mountpoint1/cmdline.txt
+echo $bootcodes3 > mountpoint1/cmdline3.txt
 printf "Bootcodes:\n"
 cat mountpoint1/cmdline.txt
+cat mountpoint1/cmdline3.txt
 
 linebreak
 pause "Press any key to continue.."
