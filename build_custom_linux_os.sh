@@ -153,6 +153,8 @@ chmod +x fetchExt.sh
 ./fetchExt.sh wbar
 ./fetchExt.sh rpi-vc
 ./fetchExt.sh libv4l2
+./fetchExt.sh ffmpeg
+./fetchExt.sh gstreamer
 ./fetchExt.sh aterm
 ./fetchExt.sh firefox
 pause "Extensions downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
