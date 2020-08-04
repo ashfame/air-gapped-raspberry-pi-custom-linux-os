@@ -112,6 +112,9 @@ printf "Bootcodes:\n"
 cat mountpoint1/cmdline.txt
 cat mountpoint1/cmdline3.txt
 
+# Change config.txt
+echo "\nhdmi_force_hotplug=1" >> config.txt
+
 linebreak
 pause "Press any key to continue.."
 
