@@ -45,7 +45,7 @@ cd picore
 
 # Download picore archive, extract & verify md5sum
 # Reuse zip file its already downloaded
-[ -f piCore-11.0.zip ] && echo "Reusing already downloaded piCore-11.0.zip file" || wget http://tinycorelinux.net/11.x/armv6/releases/RPi/piCore-11.0.zip
+[ -f piCore-11.0.zip ] && echo "Reusing already downloaded piCore-11.0.zip file" || wget http://tinycorelinux.net/11.x/armv7/releases/RPi/piCore-11.0.zip
 unzip -o piCore-11.0.zip # overwrite existing files during unzip
 printf "MD5 verification of IMG file:"
 md5sum -c piCore-11.0.img.md5.txt
