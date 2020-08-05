@@ -112,8 +112,16 @@ printf "Bootcodes:\n"
 cat mountpoint1/cmdline.txt
 cat mountpoint1/cmdline3.txt
 
+# Download overlay
+cd overlays
+wget https://github.com/goodtft/LCD-show/raw/master/usr/tft35a-overlay.dtb
+cd ..
+
 # Change config.txt
-echo "\nhdmi_force_hotplug=1" >> config.txt
+echo "" >> config.txt # ensure new line
+echo "hdmi_force_hotplug=1" >> config.txt
+echo "dtparam=i2c_arm=on" >> config.txt
+echo "dtoverlay=tft35a:rotate=90" >> config.txt
 
 linebreak
 pause "Press any key to continue.."
