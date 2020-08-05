@@ -118,10 +118,10 @@ wget https://github.com/goodtft/LCD-show/raw/master/usr/tft35a-overlay.dtb
 cd ../..
 
 # Change config.txt
-echo "" >> config.txt # ensure new line
-echo "hdmi_force_hotplug=1" >> config.txt
-echo "dtparam=i2c_arm=on" >> config.txt
-echo "dtoverlay=tft35a:rotate=90" >> config.txt
+echo "" >> mountpoint1/config.txt # ensure new line
+echo "hdmi_force_hotplug=1" >> mountpoint1/config.txt
+echo "dtparam=i2c_arm=on" >> mountpoint1/config.txt
+echo "dtoverlay=tft35a:rotate=90" >> mountpoint1/config.txt
 
 linebreak
 pause "Press any key to continue.."
