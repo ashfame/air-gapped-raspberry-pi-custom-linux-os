@@ -115,12 +115,13 @@ printf "cmdline3.txt:\n"
 cat mountpoint1/cmdline3.txt
 
 # Download overlay
-cd mountpoint1/overlays
-wget -O tft35a.dtbo https://github.com/goodtft/LCD-show/raw/master/usr/tft35a-overlay.dtb
-cd ../..
+wget -O mountpoint1/overlays/tft35a.dtbo https://github.com/goodtft/LCD-show/raw/master/usr/tft35a-overlay.dtb
 
 # Change config.txt
 echo "" >> mountpoint1/config.txt # ensure new line
+echo "# For enabling camera to work" >> mountpoint1/config.txt
+echo "start_x=1" >> mountpoint1/config.txt
+echo "# For enabling touchscreen" >> mountpoint1/config.txt
 echo "hdmi_force_hotplug=1" >> mountpoint1/config.txt
 echo "dtparam=i2c_arm=on" >> mountpoint1/config.txt
 echo "dtoverlay=tft35a:rotate=90" >> mountpoint1/config.txt
