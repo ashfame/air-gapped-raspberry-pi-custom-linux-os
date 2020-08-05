@@ -109,7 +109,9 @@ bootcodes3="${bootcodes3} ${addbootcodes}"
 echo $bootcodes > mountpoint1/cmdline.txt
 echo $bootcodes3 > mountpoint1/cmdline3.txt
 printf "Bootcodes:\n"
+printf "cmdline.txt:\n"
 cat mountpoint1/cmdline.txt
+printf "cmdline3.txt:\n"
 cat mountpoint1/cmdline3.txt
 
 # Download overlay
