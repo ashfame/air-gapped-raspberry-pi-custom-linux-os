@@ -159,10 +159,8 @@ chmod +x fetchExt.sh
 ./fetchExt.sh flwm_topside
 ./fetchExt.sh Xorg
 ./fetchExt.sh wbar
-./fetchExt.sh rpi-vc
-./fetchExt.sh libv4l2
+./fetchExt.sh v4l2-utils
 ./fetchExt.sh ffmpeg
-./fetchExt.sh gstreamer
 ./fetchExt.sh aterm
 ./fetchExt.sh firefox
 pause "Extensions downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
@@ -182,10 +180,10 @@ echo "Xorg.tcz" > onboot.lst # overwrite, not append, effectively clearing the f
 echo "flwm_topside.tcz" >> onboot.lst
 echo "wbar.tcz" >> onboot.lst
 echo "vaultbareapp.tcz" >> onboot.lst
-echo "rpi-vc.tcz" >> onboot.lst
-echo "libv4l2.tcz" >> onboot.lst
+echo "v4l2-utils.tcz" >> onboot.lst
 echo "aterm.tcz" >> onboot.lst
 echo "firefox.tcz" >> onboot.lst
+echo "ffmpeg.tcz" >> onboot.lst
 
 # Unmount second partition
 cd ../../
