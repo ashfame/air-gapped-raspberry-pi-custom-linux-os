@@ -113,9 +113,9 @@ cat mountpoint1/cmdline.txt
 cat mountpoint1/cmdline3.txt
 
 # Download overlay
-cd overlays
+cd mountpoint1/overlays
 wget https://github.com/goodtft/LCD-show/raw/master/usr/tft35a-overlay.dtb
-cd ..
+cd ../..
 
 # Change config.txt
 echo "" >> config.txt # ensure new line
