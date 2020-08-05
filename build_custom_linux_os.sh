@@ -103,7 +103,7 @@ test $? -eq 0 || ( echo "Error mounting 1st partition!!" && exit 1 )
 bootcodes=`cat mountpoint1/cmdline.txt`
 bootcodes3=`cat mountpoint1/cmdline3.txt`
 # Add norestore,noswap bootcode
-addbootcodes="norestore noswap nozswap nodhcp waitusb=5"
+addbootcodes="norestore noswap nozswap nodhcp waitusb=5 fbcon=map:10 fbcon=font:ProFont6x11 logo.nologo"
 bootcodes="${bootcodes} ${addbootcodes}"
 bootcodes3="${bootcodes3} ${addbootcodes}"
 echo $bootcodes > mountpoint1/cmdline.txt
