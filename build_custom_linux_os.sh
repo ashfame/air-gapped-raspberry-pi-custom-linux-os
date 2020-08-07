@@ -173,7 +173,7 @@ linebreak
 # Clean fetchExt.sh files
 rm -f Log.txt Extension.list fetchExt.sh
 
-cd ../../../
+cd ../../../../
 
 #########################
 # Add custom extensions #
@@ -181,13 +181,14 @@ cd ../../../
 # Add vaultapp extension
 wget https://woodpckr.com/vaultapp.tcz
 chown 1001:50 vaultapp.tcz
-cp vaultapp.tcz mountpoint2/tce/optional/
+cp vaultapp.tcz picore/mountpoint2/tce/optional/
 # Add OS customizations extension
 mksquashfs includes airgap.tcz
 chown 1001:50 airgap.tcz
-cp airgap.tcz mountpoint2/tce/optional/
+cp airgap.tcz picore/mountpoint2/tce/optional/
 
 # Add extensions to onboot.lst for auto-loading
+cd picore
 # But first clear existing entries in it
 echo "Xorg.tcz" > mountpoint2/tce/onboot.lst # overwrite, not append, effectively clearing the file before writing to it
 echo "flwm_topside.tcz" >> mountpoint2/tce/onboot.lst
