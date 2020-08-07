@@ -152,7 +152,9 @@ cd ..
 [ -f fetchExt.sh ] && cp fetchExt.sh picore/mountpoint2/tce/optional || ( echo "fetchExt.sh is missing" && exit 1 )
 cd picore
 
-# Download extensions
+#######################
+# Download extensions #
+#######################
 printf "\nReady to fetch extensions. "
 pause "Press any key to continue.."
 linebreak
@@ -163,42 +165,44 @@ chmod +x fetchExt.sh
 ./fetchExt.sh Xorg
 ./fetchExt.sh wbar
 ./fetchExt.sh v4l2-utils
-./fetchExt.sh ffmpeg
 ./fetchExt.sh aterm
 ./fetchExt.sh firefox
 pause "Extensions downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
 linebreak
 
-# Add custom extensions
-wget https://woodpckr.com/vaultbareapp.tcz
-chown 1001:50 vaultbareapp.tcz
-
 # Clean fetchExt.sh files
 rm -f Log.txt Extension.list fetchExt.sh
 
+cd ../../../
+
+#########################
+# Add custom extensions #
+#########################
+# Add vaultapp extension
+wget https://woodpckr.com/vaultapp.tcz
+chown 1001:50 vaultapp.tcz
+cp vaultapp.tcz mountpoint2/tce/optional/
+# Add OS customizations extension
+mksquashfs includes airgap.tcz
+chown 1001:50 airgap.tcz
+cp airgap.tcz mountpoint2/tce/optional/
+
 # Add extensions to onboot.lst for auto-loading
-cd ..
 # But first clear existing entries in it
-echo "Xorg.tcz" > onboot.lst # overwrite, not append, effectively clearing the file before writing to it
-echo "flwm_topside.tcz" >> onboot.lst
-echo "wbar.tcz" >> onboot.lst
-echo "vaultbareapp.tcz" >> onboot.lst
-echo "v4l2-utils.tcz" >> onboot.lst
-echo "aterm.tcz" >> onboot.lst
-echo "firefox.tcz" >> onboot.lst
-echo "ffmpeg.tcz" >> onboot.lst
+echo "Xorg.tcz" > mountpoint2/tce/onboot.lst # overwrite, not append, effectively clearing the file before writing to it
+echo "flwm_topside.tcz" >> mountpoint2/tce/onboot.lst
+echo "wbar.tcz" >> mountpoint2/tce/onboot.lst
+echo "vaultapp.tcz" >> mountpoint2/tce/onboot.lst
+echo "v4l2-utils.tcz" >> mountpoint2/tce/onboot.lst
+echo "aterm.tcz" >> mountpoint2/tce/onboot.lst
+echo "firefox.tcz" >> mountpoint2/tce/onboot.lst
+echo "airgap.tcz" >> mountpoint2/tce/onboot.lst
 
 # Unmount second partition
-cd ../../
 umount mountpoint2
 
-# Check out modified IMG file
-printf "MD5 verification of modified IMG file (should fail):"
-md5sum -c piCore-11.0.img.md5.txt
-pause "Press any key to continue.."
-
 # Copy out the modified IMG file
-cp piCore-11.0.img ../piCore-airgap-11.0.img
+mv piCore-11.0.img ../airgap.img
 cd ..
 
 # Cleanup before exit
