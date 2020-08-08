@@ -192,14 +192,14 @@ cp airgap.tcz picore/mountpoint2/tce/optional/
 # Add extensions to onboot.lst for auto-loading
 cd picore
 # But first clear existing entries in it
-echo "Xorg.tcz" > mountpoint2/tce/onboot.lst # overwrite, not append, effectively clearing the file before writing to it
+echo "airgap.tcz" > mountpoint2/tce/onboot.lst # overwrite, not append, effectively clearing the file before writing to it
+echo "Xorg.tcz" >> mountpoint2/tce/onboot.lst
 echo "flwm_topside.tcz" >> mountpoint2/tce/onboot.lst
 echo "wbar.tcz" >> mountpoint2/tce/onboot.lst
 echo "vaultapp.tcz" >> mountpoint2/tce/onboot.lst
 echo "v4l2-utils.tcz" >> mountpoint2/tce/onboot.lst
 echo "aterm.tcz" >> mountpoint2/tce/onboot.lst
 echo "firefox.tcz" >> mountpoint2/tce/onboot.lst
-echo "airgap.tcz" >> mountpoint2/tce/onboot.lst
 
 # Unmount second partition
 umount mountpoint2
