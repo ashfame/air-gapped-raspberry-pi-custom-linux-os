@@ -116,6 +116,7 @@ cat mountpoint1/cmdline3.txt
 
 # Download overlay
 wget https://github.com/goodtft/LCD-show/raw/master/usr/tft35a-overlay.dtb
+mv tft35a-overlay.dtb mountpoint1/overlays/
 cp mountpoint1/overlays/tft35a-overlay.dtb mountpoint1/overlays/tft35a.dtbo
 
 # Change config.txt
