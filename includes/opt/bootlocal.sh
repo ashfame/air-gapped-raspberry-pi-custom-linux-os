@@ -15,4 +15,4 @@ echo ondemand > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 sudo umount /mnt/mmcblk0p2
 
 # Remove one of the Xorg config
-rm /usr/local/share/X11/xorg.conf.d/40-libinput.conf
+# rm /usr/local/share/X11/xorg.conf.d/40-libinput.conf
