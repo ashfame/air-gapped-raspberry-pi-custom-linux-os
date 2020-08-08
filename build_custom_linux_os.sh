@@ -115,7 +115,8 @@ printf "cmdline3.txt:\n"
 cat mountpoint1/cmdline3.txt
 
 # Download overlay
-wget -O mountpoint1/overlays/tft35a.dtbo https://github.com/goodtft/LCD-show/raw/master/usr/tft35a-overlay.dtb
+wget https://github.com/goodtft/LCD-show/raw/master/usr/tft35a-overlay.dtb
+cp mountpoint1/overlays/tft35a-overlay.dtb mountpoint1/overlays/tft35a.dtbo
 
 # Change config.txt
 echo "" >> mountpoint1/config.txt # ensure new line
