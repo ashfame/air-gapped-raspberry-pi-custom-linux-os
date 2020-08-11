@@ -1,4 +1,5 @@
 #!/bin/bash
+# Script written by Ashfame (Ashish Kumar) https://ashfame.com
 
 # Repository to download from
 ADDR="http://repo.tinycorelinux.net"
@@ -88,7 +89,14 @@ fi
 # first invocation
 download $1
 
-# set file permissions
+# set file permissions, numeric values for tc:staff used here, since these users may not exist on the host system where this script is executed
+echo ""
+echo "Warning:"
+echo "Script will now attempt to set file permissions on the downloaded files."
+echo "If you are not running this as root user or with sudo, this will fail."
+echo "Simply run the following command as root user or with sudo to do it yourself:"
+echo "sudo chown 1001:50 *.tcz*"
+read -p "Press any key to continue.."
 chown 1001:50 *.tcz*
 
 # cleanup
