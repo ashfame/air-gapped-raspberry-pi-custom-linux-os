@@ -151,7 +151,7 @@ rm mountpoint2/tce/mydata.tgz
 # Copy Extensions fetching script(s) under tce/optional for fetching packages
 # If its missing, throw error message and halt script
 cd ..
-[ -f fetchExt.sh ] && cp fetchExt.sh picore/mountpoint2/tce/optional || ( echo "fetchExt.sh is missing" && exit 1 )
+[ -f fetch.sh ] && cp fetch.sh picore/mountpoint2/tce/optional || ( echo "fetch.sh is missing" && exit 1 )
 cd picore
 
 #######################
@@ -162,18 +162,18 @@ pause "Press any key to continue.."
 linebreak
 cd mountpoint2/tce/optional
 rm *tcz* # remove all existing extensions, we will explicitly specify what we are going to need
-chmod +x fetchExt.sh
-./fetchExt.sh flwm_topside
-./fetchExt.sh Xorg
-./fetchExt.sh wbar
-./fetchExt.sh v4l2-utils
-./fetchExt.sh aterm
-./fetchExt.sh firefox
+chmod +x fetch.sh
+./fetch.sh flwm_topside
+./fetch.sh Xorg
+./fetch.sh wbar
+./fetch.sh v4l2-utils
+./fetch.sh aterm
+./fetch.sh firefox
 pause "Extensions downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
 linebreak
 
-# Clean fetchExt.sh files
-rm -f Log.txt Extension.list fetchExt.sh
+# Clean fetch.sh files
+rm -f Log.txt Extension.list fetch.sh
 
 cd ../../../../
 
