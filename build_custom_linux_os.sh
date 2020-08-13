@@ -168,7 +168,7 @@ chmod +x fetch.sh
 ./fetch.sh wbar
 ./fetch.sh v4l2-utils
 ./fetch.sh aterm
-./fetch.sh firefox
+#./fetch.sh firefox
 pause "Extensions downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
 linebreak
 
@@ -181,9 +181,14 @@ cd ../../../../
 # Add custom extensions #
 #########################
 # Add vaultapp extension
-wget https://woodpckr.com/vaultapp.tcz
-chown 1001:50 vaultapp.tcz
-cp vaultapp.tcz picore/mountpoint2/tce/optional/
+wget -O picore/mountpoint2/tce/optional/vaultapp.tcz https://woodpckr.com/vaultapp.tcz
+chown 1001:50 picore/mountpoint2/tce/optional/vaultapp.tcz
+# Add hacky chromium extension
+wget -O picore/mountpoint2/tce/optional/chromium.tcz https://woodpckr.com/chromium.tcz
+echo "gtk3.tcz" > picore/mountpoint2/tce/optional/chromium.tcz.dep
+echo "gnutls.tcz" >> picore/mountpoint2/tce/optional/chromium.tcz.dep
+echo "libavahi.tcz" >> picore/mountpoint2/tce/optional/chromium.tcz.dep
+chown 1001:50 picore/mountpoint2/tce/optional/chromium.tcz*
 # Add OS customizations extension
 mksquashfs includes airgap.tcz
 chown 1001:50 airgap.tcz
@@ -199,7 +204,8 @@ echo "wbar.tcz" >> mountpoint2/tce/onboot.lst
 echo "vaultapp.tcz" >> mountpoint2/tce/onboot.lst
 echo "v4l2-utils.tcz" >> mountpoint2/tce/onboot.lst
 echo "aterm.tcz" >> mountpoint2/tce/onboot.lst
-echo "firefox.tcz" >> mountpoint2/tce/onboot.lst
+echo "chromium.tcz" >> mountpoint2/tce/onboot.lst
+#echo "firefox.tcz" >> mountpoint2/tce/onboot.lst
 
 # Unmount second partition
 umount mountpoint2
