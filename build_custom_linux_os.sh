@@ -169,6 +169,11 @@ chmod +x fetch.sh
 ./fetch.sh v4l2-utils
 ./fetch.sh aterm
 #./fetch.sh firefox
+# For chromium - start of dependencies
+./fetch.sh gtk3
+./fetch.sh gnutls
+./fetch.sh libavahi
+# For chromium - end of dependencies
 pause "Extensions downloaded. Review Log.txt if you wish. Afterwards press any key to continue.."
 linebreak
 
